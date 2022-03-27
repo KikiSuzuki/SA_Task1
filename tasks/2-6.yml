@@ -1,0 +1,35 @@
+version: '3.5' 
+
+services: 
+
+  backend: 
+    image: kurkku-backend
+    build: ./back
+    ports: 
+     - "8000:8000"
+    container_name: kurkku-backend
+    environment:
+    - REDIS=database
+    - REDIS_PORT=6379
+    - DB_USERNAME=juuseri
+    - DB_PASSWORD=passu
+    - DB_NAME=daattabaasi
+    - DB_HOST=postgres
+  frontend: 
+    image: kurkku-frontend
+    build: ./front
+    ports: 
+     - "5000:5000"
+    container_name: kurkku-frontend
+  database:
+    image: redis:latest
+    ports:
+    - "6379:6379"
+  postgres:
+    image: postgres:latest
+    ports:
+    - "3306:3306"
+    environment:
+    - POSTGRES_PASSWORD=passu
+    - POSTGRES_USER=juuseri
+    - POSTGRES_DB=daattabaasi

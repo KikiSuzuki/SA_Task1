@@ -1,0 +1,13 @@
+docker run -d --name ng-test nginx
+docker run -d --name pg-test postgres
+docker run -d --name rd-test redis
+
+docker stop ng-test
+docker stop pg-test
+
+docker ps
+
+docker stop rd-test
+
+docker containers purge
+docker images purge
